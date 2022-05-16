@@ -1,9 +1,14 @@
-
+import Header from "./components/Header";
+import SelectMonth from "./components/SelectMonth";
 
 function App() {
   return (
-    <h1>Calculadora de inflacion del peso dominicano</h1>
+    <>
+      <Header />
+      <SelectMonth />
+      <SelectMonth />
+    </>
   );
 }
 
-export default App;
+export default App; 
