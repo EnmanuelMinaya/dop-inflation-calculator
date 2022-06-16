@@ -5,12 +5,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 
 
-export default function AmountInput() {
-    const [amount, setAmount] = React.useState();
+export default function InputAmount(props) {
 
-    const handleChange = (event) => {
-        setAmount(event.target.value);
-    };
 
     return (
         <div>
@@ -18,8 +14,8 @@ export default function AmountInput() {
                 <InputLabel htmlFor="filled-adornment-amount">Monto</InputLabel>
                 <FilledInput
                     id="filled-adornment-amount"
-                    value={amount}
-                    onChange={handleChange}
+                    value={props.amount}
+                    onChange={props.onChange}
                     startAdornment={<InputAdornment position="start">RD$</InputAdornment>}
                 />
             </FormControl>
