@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Header from "./components/Header";
-import AmountInput from "./components/InputAmount";
+import InputAmount from "./components/InputAmount";
 import Result from "./components/Result";
 import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -12,10 +12,12 @@ import Button from '@mui/material/Button';
 
 function App() {
 
-  const [initialDate, setInitialDate] = React.useState(new Date());
-  const [endingDate, setEndingDate] = React.useState(new Date());
+  const [initialDate, setInitialDate] = React.useState(new Date('2021-12-01'));
+  const [endingDate, setEndingDate] = React.useState(new Date('2022-01-01'));
   const [amount, setAmount] = React.useState(0);
+  const [resultAmount, setResultAmount] = React.useState(0);
 
+  console.log(IpcData)
   const updateInitialDate = (newDate) => {
     setInitialDate(newDate);
   };
@@ -27,14 +29,27 @@ function App() {
   };
 
   const getCpiFromDate = (date) => {
-    const ipcObj = IpcData.filter(item => item.year === date.getFullYear() && item.month === date.getMonth());
+    const [ipcObj] = IpcData.filter(item => item.year === date.getFullYear() && item.month === date.getMonth())
     return ipcObj.ipc;
   }
 
-  const getInflationRate = (endCpi, InitialCpi) => {
-    return (endCpi - InitialCpi) / InitialCpi;
+
+  const calculateInflationRate = (InitialCpi, endingCpi) => {
+    return ((endingCpi - InitialCpi) / InitialCpi) * 100;
   };
 
+  const calculateInflatedAmount = (amount, initialDate, endingDate) => {
+
+    const initialCpi = getCpiFromDate(initialDate)
+    console.log(initialCpi)
+    const endingCpi = getCpiFromDate(endingDate)
+    console.log(endingCpi)
+    const inflationRate = calculateInflationRate(initialCpi, endingCpi);
+    console.log(inflationRate)
+    setResultAmount(amount * endingCpi / initialCpi)
+  }
+
+  const handleClick = () => { calculateInflatedAmount(amount, initialDate, endingDate) }
 
   return (
     <>
@@ -63,8 +78,8 @@ function App() {
       <InputAmount amount={amount} onChange={updateAmount} />
 
       <Button variant="contained">Contained</Button>
-
-      <Result result={resultAmount} />
+      <button onClick={handleClick}>Calcular</button>
+      <Result resultAmount={resultAmount} />
     </>
   );
 }

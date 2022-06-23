@@ -3,10 +3,12 @@ import Typography from '@mui/material/Typography';
 
 
 const Result = (props) => {
+
+    const result = props.resultAmount;
     return (
         <div>
             <Typography variant="h6" color="inherit" component="div">
-                Resultado:{props.result}
+                Resultado:{result}
             </Typography>
         </div>
     )

@@ -1,24 +1,24 @@
 import React from 'react'
-import FilledInput from '@mui/material/FilledInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
 
 
 export default function InputAmount(props) {
+    const amount = props.amount;
+    const setAmount = props.onChange;
+    const handleChange = (event) => {
+        setAmount(event.target.value);
+    };
 
 
     return (
         <div>
-            <FormControl fullWidth sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="filled-adornment-amount">Monto</InputLabel>
-                <FilledInput
-                    id="filled-adornment-amount"
-                    value={props.amount}
-                    onChange={props.onChange}
-                    startAdornment={<InputAdornment position="start">RD$</InputAdornment>}
-                />
-            </FormControl>
+            <TextField
+                required
+                id="outlined-required"
+                label="Required"
+                defaultValue="0"
+                onChange={handleChange}
+            />
         </div>
     );
 }
