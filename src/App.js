@@ -7,7 +7,6 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import IpcData from './assets/ipc.json';
-import Button from '@mui/material/Button';
 
 
 function App() {
@@ -16,6 +15,8 @@ function App() {
   const [endingDate, setEndingDate] = React.useState(new Date('2022-01-01'));
   const [amount, setAmount] = React.useState(0);
   const [resultAmount, setResultAmount] = React.useState(0);
+  const [inflationRate, setInflationRate] = React.useState(0);
+
 
   console.log(IpcData)
   const updateInitialDate = (newDate) => {
@@ -41,11 +42,9 @@ function App() {
   const calculateInflatedAmount = (amount, initialDate, endingDate) => {
 
     const initialCpi = getCpiFromDate(initialDate)
-    console.log(initialCpi)
     const endingCpi = getCpiFromDate(endingDate)
-    console.log(endingCpi)
     const inflationRate = calculateInflationRate(initialCpi, endingCpi);
-    console.log(inflationRate)
+    setInflationRate(inflationRate)
     setResultAmount(amount * endingCpi / initialCpi)
   }
 
@@ -57,7 +56,7 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           views={['year', 'month']}
-          label="Year and Month"
+          label="Desde"
           minDate={new Date('2012-03-01')}
           maxDate={new Date('2023-06-01')}
           value={initialDate}
@@ -66,7 +65,7 @@ function App() {
         />
         <DatePicker
           views={['year', 'month']}
-          label="Year and Month"
+          label="Hasta"
           minDate={new Date('2012-03-01')}
           maxDate={new Date('2023-06-01')}
           value={endingDate}
@@ -77,9 +76,8 @@ function App() {
 
       <InputAmount amount={amount} onChange={updateAmount} />
 
-      <Button variant="contained">Contained</Button>
       <button onClick={handleClick}>Calcular</button>
-      <Result resultAmount={resultAmount} />
+      <Result resultAmount={resultAmount} inflationRate={inflationRate} />
     </>
   );
 }

@@ -9,13 +9,11 @@ export default function InputAmount(props) {
         setAmount(event.target.value);
     };
 
-
     return (
         <div>
             <TextField
-                required
                 id="outlined-required"
-                label="Required"
+                label="Monto"
                 defaultValue="0"
                 onChange={handleChange}
             />
