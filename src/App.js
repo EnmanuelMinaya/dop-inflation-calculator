@@ -66,7 +66,7 @@ function App() {
         <DatePicker
           views={['year', 'month']}
           label="Hasta"
-          minDate={new Date('2012-03-01')}
+          minDate={initialDate}
           maxDate={new Date('2023-06-01')}
           value={endingDate}
           onChange={updateEndingDate}
