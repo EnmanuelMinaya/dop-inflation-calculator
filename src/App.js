@@ -57,8 +57,8 @@ function App() {
         <DatePicker
           views={['year', 'month']}
           label="Desde"
-          minDate={new Date('2012-03-01')}
-          maxDate={new Date('2023-06-01')}
+          minDate={new Date('1984-02-01')}
+          maxDate={new Date('2022-06-01')}
           value={initialDate}
           onChange={updateInitialDate}
           renderInput={(params) => <TextField {...params} helperText={null} />}
@@ -67,7 +67,7 @@ function App() {
           views={['year', 'month']}
           label="Hasta"
           minDate={initialDate}
-          maxDate={new Date('2023-06-01')}
+          maxDate={new Date('2022-06-01')}
           value={endingDate}
           onChange={updateEndingDate}
           renderInput={(params) => <TextField {...params} helperText={null} />}
