@@ -58,7 +58,7 @@ function App() {
           views={['year', 'month']}
           label="Desde"
           minDate={new Date('1984-02-01')}
-          maxDate={new Date('2022-06-01')}
+          maxDate={new Date('2022-08-01')}
           value={initialDate}
           onChange={updateInitialDate}
           renderInput={(params) => <TextField {...params} helperText={null} />}
