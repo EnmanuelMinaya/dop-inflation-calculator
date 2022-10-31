@@ -7,6 +7,8 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import IpcData from './assets/ipc.json';
+import Stack from '@mui/material/Stack';
+
 
 
 function App() {
@@ -54,24 +56,28 @@ function App() {
     <>
       <Header />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          views={['year', 'month']}
-          label="Desde"
-          minDate={new Date('1984-01-01')}
-          maxDate={new Date('2022-09-01')}
-          value={initialDate}
-          onChange={updateInitialDate}
-          renderInput={(params) => <TextField {...params} helperText={null} />}
-        />
-        <DatePicker
-          views={['year', 'month']}
-          label="Hasta"
-          minDate={initialDate}
-          maxDate={new Date('2022-09-01')}
-          value={endingDate}
-          onChange={updateEndingDate}
-          renderInput={(params) => <TextField {...params} helperText={null} />}
-        />
+        <Stack spacing={3} justifyContent="center"
+          alignItems="center">
+          <DatePicker
+            views={['year', 'month']}
+            label="Desde"
+            minDate={new Date('1984-01-01')}
+            maxDate={new Date('2022-09-01')}
+            value={initialDate}
+            onChange={updateInitialDate}
+            renderInput={(params) => <TextField {...params} helperText={null} />}
+          />
+          <DatePicker
+            views={['year', 'month']}
+            label="Hasta"
+            minDate={initialDate}
+            maxDate={new Date('2022-09-01')}
+            value={endingDate}
+            onChange={updateEndingDate}
+            renderInput={(params) => <TextField {...params} helperText={null} />}
+          />
+        </Stack>
+
       </LocalizationProvider>
 
       <InputAmount amount={amount} onChange={updateAmount} />
