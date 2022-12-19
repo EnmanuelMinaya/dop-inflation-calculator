@@ -6,14 +6,13 @@ import Typography from '@mui/material/Typography';
 
 export default function Header() {
     return (
-        <Box sx={{ flexGrow: 1, margin: 2 }}>
-            <AppBar position="static">
-                <Toolbar variant="dense">
-                    <Typography variant="h6" color="inherit" component="div">
-                        Calculadora de inflación del peso dominicano
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+        <Box sx={{
+            backgroundColor: '#192841',
+            marginTop: '17px'
+        }}>
+            <Typography variant="h6" color="#D3D3D3">
+                Calculadora de inflación
+            </Typography>
         </Box>
     );
 }

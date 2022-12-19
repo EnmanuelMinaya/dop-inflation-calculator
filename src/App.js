@@ -8,7 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import IpcData from './assets/ipc.json';
 import Stack from '@mui/material/Stack';
-
+import { Container } from './components/styled/Container.Styled';
 
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
   };
   const updateAmount = (newAmount) => {
     setAmount(newAmount);
+    calculateInflatedAmount(newAmount, initialDate, endingDate)
   };
 
   const getCpiFromDate = (date) => {
@@ -53,14 +54,15 @@ function App() {
   const handleClick = () => { calculateInflatedAmount(amount, initialDate, endingDate) }
 
   return (
-    <>
-      <Header />
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Stack spacing={3} justifyContent="center"
-          alignItems="center">
+    <Container>
+      <Stack spacing={3}
+        alignItems="center">
+        <Header />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
+            sx={{ width: 320 }}
             views={['year', 'month']}
-            label="Desde"
+            label="Fecha inicial"
             minDate={new Date('1984-01-01')}
             maxDate={new Date('2022-09-01')}
             value={initialDate}
@@ -68,23 +70,24 @@ function App() {
             renderInput={(params) => <TextField {...params} helperText={null} />}
           />
           <DatePicker
+            style={{ width: 350 }}
             views={['year', 'month']}
-            label="Hasta"
+            label="Fecha final"
             minDate={initialDate}
             maxDate={new Date('2022-09-01')}
             value={endingDate}
             onChange={updateEndingDate}
             renderInput={(params) => <TextField {...params} helperText={null} />}
           />
-        </Stack>
+        </LocalizationProvider>
 
-      </LocalizationProvider>
+        <InputAmount amount={amount} onChange={updateAmount} />
 
-      <InputAmount amount={amount} onChange={updateAmount} />
+        <button onClick={handleClick}>Calcular</button>
 
-      <button onClick={handleClick}>Calcular</button>
-      <Result resultAmount={resultAmount} inflationRate={inflationRate} />
-    </>
+        <Result resultAmount={resultAmount} inflationRate={inflationRate} />
+      </Stack>
+    </Container>
   );
 }
 

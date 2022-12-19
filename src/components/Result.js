@@ -1,5 +1,5 @@
 import React from 'react'
-import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
 
 const Result = (props) => {
@@ -13,12 +13,17 @@ const Result = (props) => {
 
     return (
         <div>
-            <Typography variant="h6" color="inherit" component="div">
-                Resultado: RD${resultAmount}
-            </Typography>
-            <Typography variant="h6" color="inherit" component="div">
-                Inflación:{inflationRate}%
-            </Typography>
+            <div>
+                <TextField value={`RD$` + resultAmount} label='Monto final' style={{ width: 315 }}
+                >
+                </TextField>
+            </div>
+            <div>
+                <TextField value={inflationRate} label='Índice de inflación' style={{ width: 315 }}
+                >
+                </TextField>
+            </div>
+
         </div>
     )
 }
